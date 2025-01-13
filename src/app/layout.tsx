@@ -26,8 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <SideBar />
-        <div className="ml-[17%]">{children}</div>
+        <SideBar>{children}</SideBar>
       </body>
     </html>
   );

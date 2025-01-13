@@ -1,65 +1,183 @@
 "use client";
-
-import Image from "next/image";
-import sarasehatLogo from "../../../public/images/logo/sarasehat-logo.png";
-import { MdKeyboardArrowRight } from "react-icons/md";
-import { TbTransactionDollar } from "react-icons/tb";
-import { HiDocumentReport } from "react-icons/hi";
 import { useState } from "react";
+import sarasehatLogo from "../../../public/images/logo/sarasehat-logo.png";
+import { GrTransaction } from "react-icons/gr";
+import { TbReportAnalytics } from "react-icons/tb";
+import Image from "next/image";
+import Link from "next/link";
 
-export default function SideBar() {
-  const [indexTab, setIndexTab] = useState(0);
+type SideBarProps = {
+  children: React.ReactNode;
+};
 
-  const handleClick = (index: number) => {
-    setIndexTab(index);
-  };
-
+export default function SideBar({ children }: SideBarProps) {
   return (
-    <nav className="bg-[#0bb29d] fixed text-white w-[250px] h-screen overflow-y-auto">
-      <div className="bg-white p-3 rounded-xl mx-auto w-[90%] mt-5">
-        <Image src={sarasehatLogo} alt="logo" />
-      </div>
-      <div className="mt-5 py-3">
-        <h2 className="text-center w-full font-bold text-lg">John Doe</h2>
-      </div>
-      <div className="mt-5">
-        <ul className="flex flex-col text-md cursor-pointer">
-          <li onClick={() => handleClick(1)}>
-            {/* Main Menu */}
-            <div className="flex items-center gap-2 p-3 hover:bg-[#275c7f]">
-              <TbTransactionDollar size={28} />
-              <div className="flex items-center justify-between flex-1">
-                <h2>Transaction</h2>
-                <MdKeyboardArrowRight size={30} />
+    <div className="flex flex-row">
+      <div className="w-full max-w-[18rem]">
+        <aside className="sidebar h-full sidebar-fixed-left justify-start bg-[#0bb29d]">
+          {/* Header Title */}
+          <Link href="/">
+            <section className="sidebar-title items-center p-4 bg-white rounded-xl w-[80%] mx-auto mt-4">
+              <Image src={sarasehatLogo} alt="logo" />
+            </section>
+          </Link>
+
+          {/* Content */}
+          <section className="sidebar-content h-full overflow-y-auto">
+            <nav className="menu rounded-md">
+              <section className="menu-section px-4">
+                <span className="menu-title text-white text-lg tracking-wide font-bold">
+                  DASHBOARD
+                </span>
+                <ul className="menu-items">
+                  <li>
+                    <input type="checkbox" id="menu-1" className="menu-toggle" />
+                    <label
+                      className="menu-item justify-between hover:bg-[#367a9e]"
+                      htmlFor="menu-1"
+                    >
+                      <div className="flex gap-2">
+                        <GrTransaction size={25} />
+                        <span>Transaction</span>
+                      </div>
+
+                      <span className="menu-icon">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    </label>
+
+                    <div className="menu-item-collapse">
+                      <div className="min-h-0">
+                        <Link
+                          href="/resep-pasien"
+                          className="menu-item ml-6 hover:bg-[#367a9e]"
+                        >
+                          Resep Pasien
+                        </Link>
+                        <Link
+                          href="/retur-resep"
+                          className="menu-item ml-6 hover:bg-[#367a9e]"
+                        >
+                          Retur Resep
+                        </Link>
+                        <Link
+                          href="/list-resep-pasien"
+                          className="menu-item ml-6 hover:bg-[#367a9e]"
+                        >
+                          List Resep Pasien
+                        </Link>
+                        <Link
+                          href="/outstanding-resep"
+                          className="menu-item ml-6 hover:bg-[#367a9e]"
+                        >
+                          Outstanding Daily Resep
+                        </Link>
+                        <Link
+                          href="/purchase-request"
+                          className="menu-item ml-6 hover:bg-[#367a9e]"
+                        >
+                          Purchase Request
+                        </Link>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="menu-2" className="menu-toggle" />
+                    <label
+                      className="menu-item justify-between hover:bg-[#367a9e]"
+                      htmlFor="menu-2"
+                    >
+                      <div className="flex gap-2">
+                        <TbReportAnalytics size={25} />
+                        <span>Report</span>
+                      </div>
+
+                      <span className="menu-icon">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    </label>
+
+                    <div className="menu-item-collapse">
+                      <div className="min-h-0">
+                        <Link
+                          href="stock-detail"
+                          className="menu-item ml-6 hover:bg-[#367a9e]"
+                        >
+                          Info Stock Detail
+                        </Link>
+                        <Link
+                          href="kartu-stock"
+                          className="menu-item ml-6 hover:bg-[#367a9e]"
+                        >
+                          Kartu Stock
+                        </Link>
+                        <Link
+                          href="expired-date"
+                          className="menu-item ml-6 hover:bg-[#367a9e]"
+                        >
+                          Info Expire Obat
+                        </Link>
+                        <Link
+                          href="harga-obat"
+                          className="menu-item ml-6 hover:bg-[#367a9e]"
+                        >
+                          Info Harga Obat
+                        </Link>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </section>
+            </nav>
+          </section>
+
+          {/* Footer */}
+          <section className="sidebar-footer justify-end pt-2 bg-[#0bb29d]">
+            <div className="bg-white h-[2px]" />
+            <div className="dropdown z-50 flex h-fit w-full cursor-pointer hover:bg-[#367a9e]">
+              <label
+                className="whites mx-2 flex h-fit w-full cursor-pointer p-0 hover:bg-[#367a9e]"
+                tabIndex={0}
+              >
+                <div className="flex flex-row gap-4 p-4">
+                  <div className="flex flex-col">
+                    <span>Sandra Marx</span>
+                    <span className="text-xs font-normal text-white">Admin</span>
+                  </div>
+                </div>
+              </label>
+              <div className="dropdown-menu dropdown-menu-right-top ml-2 bg-white">
+                <div className="dropdown-item text-sm text-black hover:bg-gray-400 hover:text-white">
+                  Logout
+                </div>
               </div>
             </div>
-            {/* Sub menu */}
-            {indexTab === 1 && (
-              <div>
-                <div className="p-3 hover:bg-[#275c7f]">
-                  <p className="ml-12">Menu 1</p>
-                </div>
-                <div className="p-3 hover:bg-[#275c7f]">
-                  <p className="ml-12">Menu 2</p>
-                </div>
-                <div className="p-3 hover:bg-[#275c7f]">
-                  <p className="ml-12">Menu 3</p>
-                </div>
-              </div>
-            )}
-          </li>
-          <li className="flex items-center gap-2 cursor-pointer p-3 hover:bg-[#275c7f]">
-            <HiDocumentReport size={28} />
-            <div className="flex items-center justify-between flex-1">
-              <h2>Report</h2>
-              <MdKeyboardArrowRight size={30} />
-            </div>
-          </li>
-        </ul>
+          </section>
+        </aside>
       </div>
-      <div className="flex items-center justify-between cursor-pointer p-3 hover:bg-[#275c7f] absolute w-full bottom-0">
-        <h2 className="w-full text-center">Logout</h2>
-      </div>
-    </nav>
+      <div className="p-4 w-[75%] mx-auto">{children}</div>
+    </div>
   );
 }
