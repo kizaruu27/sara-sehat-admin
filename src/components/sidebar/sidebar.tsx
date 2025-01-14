@@ -168,8 +168,8 @@ export default function SideBar({ children }: SideBarProps) {
                   </div>
                 </div>
               </label>
-              <div className="dropdown-menu dropdown-menu-right-top ml-2 bg-white">
-                <div className="dropdown-item text-sm text-black hover:bg-gray-400 hover:text-white">
+              <div className="dropdown-menu dropdown-menu-right-top ml-2 bg-gray-300">
+                <div className="dropdown-item text-sm text-black hover:bg-gray-300 hover:text-white">
                   Logout
                 </div>
               </div>

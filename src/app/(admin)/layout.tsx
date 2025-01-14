@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import SideBar from "@/components/sidebar/sidebar";
 
 const geistSans = Geist({
@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Page Not Found",
+  title: "Sarasehat Admin",
   description: "Admin Platform for Sarasehat",
   icons: {
     icon: "/favicon.png",
@@ -26,9 +26,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>{children}</body>
-    </html>
-  );
+  return <SideBar>{children}</SideBar>;
 }
