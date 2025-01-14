@@ -33,7 +33,7 @@ export default function SideBar({ children }: SideBarProps) {
                   <li>
                     <input type="checkbox" id="menu-1" className="menu-toggle" />
                     <label
-                      className="menu-item justify-between hover:bg-[#367a9e]"
+                      className="menu-item justify-between hover:bg-[#367a9e] text-white"
                       htmlFor="menu-1"
                     >
                       <div className="flex gap-2">
@@ -61,31 +61,31 @@ export default function SideBar({ children }: SideBarProps) {
                       <div className="min-h-0">
                         <Link
                           href="/resep-pasien"
-                          className="menu-item ml-6 hover:bg-[#367a9e]"
+                          className="menu-item ml-6 hover:bg-[#367a9e] text-white"
                         >
                           Resep Pasien
                         </Link>
                         <Link
                           href="/retur-resep"
-                          className="menu-item ml-6 hover:bg-[#367a9e]"
+                          className="menu-item ml-6 hover:bg-[#367a9e] text-white"
                         >
                           Retur Resep
                         </Link>
                         <Link
                           href="/list-resep-pasien"
-                          className="menu-item ml-6 hover:bg-[#367a9e]"
+                          className="menu-item ml-6 hover:bg-[#367a9e] text-white"
                         >
                           List Resep Pasien
                         </Link>
                         <Link
                           href="/outstanding-resep"
-                          className="menu-item ml-6 hover:bg-[#367a9e]"
+                          className="menu-item ml-6 hover:bg-[#367a9e] text-white"
                         >
                           Outstanding Daily Resep
                         </Link>
                         <Link
                           href="/purchase-request"
-                          className="menu-item ml-6 hover:bg-[#367a9e]"
+                          className="menu-item ml-6 hover:bg-[#367a9e] text-white"
                         >
                           Purchase Request
                         </Link>
@@ -95,7 +95,7 @@ export default function SideBar({ children }: SideBarProps) {
                   <li>
                     <input type="checkbox" id="menu-2" className="menu-toggle" />
                     <label
-                      className="menu-item justify-between hover:bg-[#367a9e]"
+                      className="menu-item justify-between hover:bg-[#367a9e] text-white"
                       htmlFor="menu-2"
                     >
                       <div className="flex gap-2">
@@ -123,25 +123,25 @@ export default function SideBar({ children }: SideBarProps) {
                       <div className="min-h-0">
                         <Link
                           href="stock-detail"
-                          className="menu-item ml-6 hover:bg-[#367a9e]"
+                          className="menu-item ml-6 hover:bg-[#367a9e] text-white"
                         >
                           Info Stock Detail
                         </Link>
                         <Link
                           href="kartu-stock"
-                          className="menu-item ml-6 hover:bg-[#367a9e]"
+                          className="menu-item ml-6 hover:bg-[#367a9e] text-white"
                         >
                           Kartu Stock
                         </Link>
                         <Link
                           href="expired-date"
-                          className="menu-item ml-6 hover:bg-[#367a9e]"
+                          className="menu-item ml-6 hover:bg-[#367a9e] text-white"
                         >
                           Info Expire Obat
                         </Link>
                         <Link
                           href="harga-obat"
-                          className="menu-item ml-6 hover:bg-[#367a9e]"
+                          className="menu-item ml-6 hover:bg-[#367a9e] text-white"
                         >
                           Info Harga Obat
                         </Link>
@@ -162,7 +162,7 @@ export default function SideBar({ children }: SideBarProps) {
                 tabIndex={0}
               >
                 <div className="flex flex-row gap-4 p-4">
-                  <div className="flex flex-col">
+                  <div className="flex flex-col text-white">
                     <span>Sandra Marx</span>
                     <span className="text-xs font-normal text-white">Admin</span>
                   </div>
