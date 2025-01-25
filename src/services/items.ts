@@ -15,7 +15,20 @@ export const getAllItem = async (payload: any) => {
 
 export const addNewItem = async (payload: any) => {
   try {
-    const response = await axios.post(`${baseUrl}/items`, payload);
+    const response = await axios.post(`${baseUrl}/items`, payload, {
+      headers: {
+        "Content-Type": "multipart/formdata",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to create new item");
+  }
+};
+
+export const deleteItem = async (itemId: number) => {
+  try {
+    const response = await axios.delete(`${baseUrl}/items/${itemId}`);
     return response.data;
   } catch (error) {
     throw new Error("Failed to create new item");

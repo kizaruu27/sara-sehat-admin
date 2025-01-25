@@ -1,21 +1,22 @@
 "use client";
 
 import { addNewItem } from "@/services/items";
+import { getAllSuppliers } from "@/services/supplier";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 interface IFormInput {
   itemName: string;
-  minStock: number;
-  maxStock: number;
-  stockIn: number;
-  wacc: number;
-  itemCategoryId: number;
-  itemTypeId: number;
-  supplierId: number;
+  minStock: string | number;
+  maxStock: string | number;
+  stockIn: string | number;
+  wacc: string | number;
+  itemCategoryId: string | number;
+  itemTypeId: string | number;
+  supplierId: string | number;
   supplierName: string;
 }
 
@@ -25,10 +26,34 @@ export default function AddItemPage() {
   const [itemTypeId, setItemTypeId] = useState<string>("default");
   const [supplierId, setSupplierId] = useState<string>("default");
   const [useExistingSupplier, setUseExistingSupplier] = useState<boolean>(false);
-
+  const { register, handleSubmit } = useForm<IFormInput>();
   const { push } = useRouter();
 
-  const { register, handleSubmit } = useForm<IFormInput>();
+  const {
+    data: supplierData,
+    isLoading: isLoadingSupplierData,
+    isError: isErrorSupplierData,
+    refetch,
+  } = useQuery({
+    queryKey: ["getAllItems"],
+    queryFn: getAllSuppliers,
+    enabled: false,
+  });
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, [hasMounted]);
+
+  useEffect(() => {
+    if (hasMounted) {
+      if (!supplierData && !isErrorSupplierData) refetch();
+    }
+  }, [hasMounted, supplierData, refetch, isErrorSupplierData]);
+
+  useEffect(() => {
+    console.log(supplierData);
+  }, [supplierData]);
+
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     if (categoryId === "default") {
       return toast.error("Category tidak boleh kosong");
@@ -37,21 +62,30 @@ export default function AddItemPage() {
       if (itemTypeId === "default") return toast.error("Tipe obat tidak boleh kosong");
     }
 
-    let payloadBody = {
-      itemName: data.itemName,
-      minStock: Number(data.minStock),
-      maxStock: Number(data.maxStock),
-      stockIn: Number(data.stockIn),
-      wacc: Number(data.wacc),
-      itemCategoryId: Number(data.itemCategoryId),
-      itemTypeId: Number(data.itemTypeId),
-      supplierName: data.supplierName,
-      // supplierId: Number(data.supplierId),
-    };
+    if (data.stockIn < data.minStock)
+      return toast.error("Stock masuk tidak bisa kurang dari minimum stock");
+    if (data.stockIn > data.maxStock)
+      return toast.error("Stock masuk tidak bisa lebih besar dari maximum stock");
+
+    const payloadBody = new FormData();
+    payloadBody.append("itemName", data.itemName);
+    payloadBody.append("minStock", data.minStock.toString());
+    payloadBody.append("maxStock", data.maxStock.toString());
+    payloadBody.append("stockIn", data.stockIn.toString());
+    payloadBody.append("wacc", data.wacc.toString());
+    payloadBody.append("itemCategoryId", data.itemCategoryId.toString());
+
+    if (data.itemTypeId) payloadBody.append("itemTypeId", data.itemTypeId.toString());
+
+    if (useExistingSupplier) {
+      payloadBody.append("supplierId", data.supplierId.toString());
+    } else {
+      payloadBody.append("supplierName", data.supplierName);
+    }
 
     addNewItem(payloadBody)
       .then((res) => {
-        toast.success(res.messege);
+        toast.success("Berhasil menambahkan item baru");
         push("/item-stock");
       })
       .catch((err) => {
@@ -145,8 +179,23 @@ export default function AddItemPage() {
                     <option value="default" disabled>
                       Pilih supplier
                     </option>
-                    <option value="1">PT Kimia Farma</option>
-                    <option value="2">PT Ngawi Barat</option>
+                    {supplierData && (
+                      <>
+                        {supplierData?.data?.length > 0 ? (
+                          <>
+                            {supplierData?.data?.map((supplier: any, index: number) => (
+                              <option key={index} value={supplier.id}>
+                                {supplier.supplierName}
+                              </option>
+                            ))}
+                          </>
+                        ) : (
+                          <option value="" disabled>
+                            Data tidak ditemukan
+                          </option>
+                        )}
+                      </>
+                    )}
                   </select>
                   <p className="text-[#0bb29d] font-semibold text-sm">
                     Ingin menambah supplier? klik{" "}
