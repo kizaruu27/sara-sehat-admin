@@ -122,6 +122,12 @@ export default function SideBar({ children }: SideBarProps) {
                     <div className="menu-item-collapse">
                       <div className="min-h-0">
                         <Link
+                          href="/item-stock"
+                          className="menu-item ml-6 hover:bg-[#367a9e] text-white"
+                        >
+                          Item Stock
+                        </Link>
+                        <Link
                           href="stock-detail"
                           className="menu-item ml-6 hover:bg-[#367a9e] text-white"
                         >
@@ -163,8 +169,8 @@ export default function SideBar({ children }: SideBarProps) {
               >
                 <div className="flex flex-row gap-4 p-4">
                   <div className="flex flex-col text-white">
-                    <span>Sandra Marx</span>
-                    <span className="text-xs font-normal text-white">Admin</span>
+                    <span>Apt. Sri Lusye Dewi Tipayanti</span>
+                    <span className="text-xs font-normal text-white">Owner</span>
                   </div>
                 </div>
               </label>

@@ -64,9 +64,7 @@ export default function StockDetailPage() {
         </form>
       </div>
 
-      <div className="mt-5">
-        <Table />
-      </div>
+      <div className="mt-5">{/* <Table /> */}</div>
     </div>
   );
 }

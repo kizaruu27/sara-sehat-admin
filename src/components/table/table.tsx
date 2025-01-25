@@ -63,7 +63,12 @@ const columns = [
   { accessorKey: "keluarAmount", header: "KELUAR AMOUNT" },
 ];
 
-const Table = () => {
+type tableProps = {
+  data: any;
+  columns: any;
+};
+
+const Table = ({ data, columns }: tableProps) => {
   const table = useReactTable({
     data,
     columns,
