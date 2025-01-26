@@ -30,7 +30,7 @@ export default function SideBar({ children }: SideBarProps) {
                   DASHBOARD
                 </span>
                 <ul className="menu-items">
-                  <li>
+                  {/* <li>
                     <input type="checkbox" id="menu-1" className="menu-toggle" />
                     <label
                       className="menu-item justify-between hover:bg-[#367a9e] text-white"
@@ -91,7 +91,7 @@ export default function SideBar({ children }: SideBarProps) {
                         </Link>
                       </div>
                     </div>
-                  </li>
+                  </li> */}
                   <li>
                     <input type="checkbox" id="menu-2" className="menu-toggle" />
                     <label
@@ -127,30 +127,30 @@ export default function SideBar({ children }: SideBarProps) {
                         >
                           Item Stock
                         </Link>
-                        <Link
+                        {/* <Link
                           href="stock-detail"
                           className="menu-item ml-6 hover:bg-[#367a9e] text-white"
                         >
                           Info Stock Detail
-                        </Link>
-                        <Link
+                        </Link> */}
+                        {/* <Link
                           href="kartu-stock"
                           className="menu-item ml-6 hover:bg-[#367a9e] text-white"
                         >
                           Kartu Stock
-                        </Link>
-                        <Link
+                        </Link> */}
+                        {/* <Link
                           href="expired-date"
                           className="menu-item ml-6 hover:bg-[#367a9e] text-white"
                         >
                           Info Expire Obat
-                        </Link>
-                        <Link
+                        </Link> */}
+                        {/* <Link
                           href="harga-obat"
                           className="menu-item ml-6 hover:bg-[#367a9e] text-white"
                         >
                           Info Harga Obat
-                        </Link>
+                        </Link> */}
                       </div>
                     </div>
                   </li>
