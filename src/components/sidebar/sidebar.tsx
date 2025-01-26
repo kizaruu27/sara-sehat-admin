@@ -100,7 +100,7 @@ export default function SideBar({ children }: SideBarProps) {
                     >
                       <div className="flex gap-2">
                         <TbReportAnalytics size={25} />
-                        <span>Report</span>
+                        <span>Gudang</span>
                       </div>
 
                       <span className="menu-icon">
@@ -125,7 +125,7 @@ export default function SideBar({ children }: SideBarProps) {
                           href="/item-stock"
                           className="menu-item ml-6 hover:bg-[#367a9e] text-white"
                         >
-                          Item Stock
+                          Stock Gudang
                         </Link>
                         {/* <Link
                           href="stock-detail"
