@@ -43,12 +43,12 @@ export default function ItemStockPage() {
 
   useEffect(() => {
     if (hasMounted) {
-      if (!itemsData && !isError) refetch();
+      refetch();
     }
   }, [hasMounted, itemsData, refetch, isError]);
 
   const handleDeleteItem = (id: number) => {
-    const confirm = window.confirm("Are you sure you want to proceed?");
+    const confirm = window.confirm("Hapus item?");
     if (confirm) {
       deleteItem(id)
         .then((res) => {
@@ -93,7 +93,9 @@ export default function ItemStockPage() {
       header: "AKSI",
       cell: (info: any) => (
         <div className="flex justify-center gap-2 p-2">
-          <FaEdit color="orange" size={17} className="cursor-pointer" />
+          <Link href={`/item-stock/edit/${info.getValue()}`}>
+            <FaEdit color="orange" size={17} />
+          </Link>
           <HiTrash
             color="red"
             size={17}
