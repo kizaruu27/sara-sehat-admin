@@ -62,9 +62,12 @@ export default function AddItemPage() {
       if (itemTypeId === "default") return toast.error("Tipe obat tidak boleh kosong");
     }
 
-    if (data.stockIn < data.minStock)
+    if (Number(data.maxStock) < Number(data.minStock))
+      return toast.error("Minimum stock dan maximum stock tidak sesuai!");
+
+    if (Number(data.stockIn) < Number(data.minStock))
       return toast.error("Stock masuk tidak bisa kurang dari minimum stock");
-    if (data.stockIn > data.maxStock)
+    if (Number(data.stockIn) > Number(data.maxStock))
       return toast.error("Stock masuk tidak bisa lebih besar dari maximum stock");
 
     const payloadBody = new FormData();
