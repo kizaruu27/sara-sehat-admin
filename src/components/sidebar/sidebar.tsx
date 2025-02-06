@@ -93,6 +93,54 @@ export default function SideBar({ children }: SideBarProps) {
                     </div>
                   </li> */}
                   <li>
+                    <input type="checkbox" id="menu-3" className="menu-toggle" />
+                    <label
+                      className="menu-item justify-between hover:bg-[#367a9e] text-white"
+                      htmlFor="menu-3"
+                    >
+                      <div className="flex gap-2">
+                        <TbReportAnalytics size={25} />
+                        <span>Transaksi</span>
+                      </div>
+
+                      <span className="menu-icon">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    </label>
+
+                    <div className="menu-item-collapse">
+                      <div className="min-h-0">
+                        <Link
+                          href="/transaction/new"
+                          className="menu-item ml-6 hover:bg-[#367a9e] text-white"
+                        >
+                          Transaksi Baru
+                        </Link>
+                      </div>
+                    </div>
+                    <div className="menu-item-collapse">
+                      <div className="min-h-0">
+                        <Link
+                          href="/transaction/list"
+                          className="menu-item ml-6 hover:bg-[#367a9e] text-white"
+                        >
+                          Daftar Transaksi
+                        </Link>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
                     <input type="checkbox" id="menu-2" className="menu-toggle" />
                     <label
                       className="menu-item justify-between hover:bg-[#367a9e] text-white"

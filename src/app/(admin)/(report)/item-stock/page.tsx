@@ -18,8 +18,6 @@ export default function ItemStockPage() {
   const [itemCategoryId, setItemCategoryId] = useState<string>("");
   const [itemName, setItemName] = useState<string>("");
 
-  const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
-
   const payload = {
     itemCode,
     itemCategoryId,
@@ -60,10 +58,6 @@ export default function ItemStockPage() {
         });
     }
   };
-
-  useEffect(() => {
-    console.log(itemsData);
-  }, [itemsData]);
 
   const columns = [
     {
