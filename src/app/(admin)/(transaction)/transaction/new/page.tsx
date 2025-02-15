@@ -98,7 +98,7 @@ export default function NewTransactionPage() {
       header: "AKSI",
       cell: (info: any) => {
         "use client";
-        const [qty, setQty] = useState<any>(0);
+        const [qty, setQty] = useState<any>(1);
         const [showInputCounter, setShowInputCounter] = useState(false);
 
         const currentStock = info.getValue().currentStock;
@@ -136,6 +136,11 @@ export default function NewTransactionPage() {
             });
         };
 
+        const onCloseCounter = () => {
+          setQty(1);
+          setShowInputCounter(false);
+        };
+
         return (
           <div className="flex justify-center gap-2 p-2">
             {showInputCounter ? (
@@ -166,6 +171,12 @@ export default function NewTransactionPage() {
                   onClick={handleSubmitCart}
                 >
                   + Keranjang
+                </button>
+                <button
+                  className="bg-red-500 text-white px-3 py-2"
+                  onClick={onCloseCounter}
+                >
+                  X
                 </button>
               </>
             ) : (
