@@ -23,6 +23,10 @@ export default function NewTransactionPage() {
     itemName,
   };
 
+  const cartPayload = {
+    status: "pending",
+  };
+
   const {
     data: itemsData,
     isError: itemsDataError,
@@ -39,7 +43,7 @@ export default function NewTransactionPage() {
     refetch: refetchCartsData,
   } = useQuery({
     queryKey: ["getAllCartsData"],
-    queryFn: () => getAllCarts(),
+    queryFn: () => getAllCarts(cartPayload),
     enabled: false,
   });
 
@@ -260,7 +264,7 @@ export default function NewTransactionPage() {
 
       {/* Cart list table */}
       {cartsData?.data?.length > 0 ? (
-        <CartListSection cartData={cartsData} />
+        <CartListSection cartData={cartsData} refetchCart={refetchCartsData} />
       ) : (
         <div className="text-center text-[#1A7E5B] mt-20">
           Data keranjang tidak ditemukan
