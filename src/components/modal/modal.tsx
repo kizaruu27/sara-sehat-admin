@@ -1,17 +1,20 @@
 type modalProps = {
-  showModal: boolean;
-  setShowModal: Function;
+  isOpen: boolean;
+  onClose: any;
   children: React.ReactNode;
 };
 
-export default function Modal({ showModal, setShowModal, children }: modalProps) {
+export default function Modal({ isOpen, onClose, children }: modalProps) {
+  if (!isOpen) return null;
+
   return (
-    <>
-      {showModal && (
-        <div className="bg-black w-full h-screen opacity-50 absolute top-0 left-0 right-0 bottom-0 z-50">
-          {children}
-        </div>
-      )}
-    </>
+    <div
+      className="fixed top-0 left-0 w-full h-full bg-[rgba(0, 0, 0, 0.5)] flex items-center justify-center"
+      onClick={onClose}
+    >
+      <div className="bg-white h-[150px] w-[240px] m-auto p-[2%] border-[2px] border-black rounded-xl shadow-md">
+        {children}
+      </div>
+    </div>
   );
 }

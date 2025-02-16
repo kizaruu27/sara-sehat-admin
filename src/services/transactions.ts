@@ -43,3 +43,11 @@ export const updateCartQty = async (cartId: any, data: any) => {
 };
 
 // transaction
+export const createTransaction = async (payload: any) => {
+  try {
+    const response = await axios.post(`${baseUrl}/transaction`, payload);
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to create transaction");
+  }
+};

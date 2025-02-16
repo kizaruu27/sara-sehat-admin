@@ -3,9 +3,9 @@ import Table from "../table/table";
 import { FaEdit } from "react-icons/fa";
 import { HiTrash } from "react-icons/hi2";
 import { useEffect, useState } from "react";
-import { deleteCart, updateCartQty } from "@/services/transactions";
+import { createTransaction, deleteCart, updateCartQty } from "@/services/transactions";
 import { toast } from "react-toastify";
-import Modal from "../modal/modal";
+import { useRouter } from "next/navigation";
 
 type cartListProps = {
   cartData: any;
@@ -18,11 +18,14 @@ export default function CartListSection({
   refetchCart,
 }: // setShowTransactionModal,
 cartListProps) {
+  const [paymentId, setPaymentId] = useState<string>("1");
+  const { push } = useRouter();
+
   const cartsRow = cartData?.data?.map((data: any) => ({
     itemCode: data?.item?.itemCode,
     itemName: data?.item?.itemName,
     qty: data?.qty,
-    totalPrice: data?.item?.wacc,
+    totalPrice: data?.item?.wacc * data?.qty,
     cartData: {
       cartId: data?.id,
       qty: data?.qty,
@@ -164,6 +167,25 @@ cartListProps) {
     },
   ];
 
+  const onCreateTransaction = async () => {
+    const cartIds = cartData?.data?.map((data: any) => data?.id);
+
+    const payloadBody = {
+      paymentTypeId: Number(paymentId),
+      statusId: 3,
+      cartIds,
+    };
+
+    await createTransaction(payloadBody)
+      .then((res) => {
+        toast.success("Transaksi berhasil!");
+        push("/transaction/list");
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
+  };
+
   return (
     <div className="mt-10">
       <h1 className="text-[#367a9e] font-semibold text-2xl uppercase tracking-wide">
@@ -171,12 +193,93 @@ cartListProps) {
       </h1>
 
       <Table columns={cartColumns} data={cartsRow} />
-      <button
-        // onClick={() => setShowTransactionModal(true)}
-        className="w-full py-2 bg-[#1A7E5B] hover:bg-[#9CE899] hover:text-[#1A7E5B] text-white mt-5"
-      >
-        Proses Transaksi
-      </button>
+
+      <div className="w-full bg-[#0bb29d] hover:bg-[#367a9e] text-white mt-5 flex justify-center">
+        <label
+          className="py-2 text-center flex-1 cursor-pointer font-bold"
+          htmlFor="modal-confirm"
+        >
+          Proses transaksi
+        </label>
+        <input className="modal-state" id="modal-confirm" type="checkbox" />
+        <div className="modal">
+          <label className="modal-overlay" htmlFor="modal-confirm"></label>
+          <div className="modal-content flex flex-col gap-5">
+            <label
+              htmlFor="modal-confirm"
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            >
+              ✕
+            </label>
+            {/* Modal Body */}
+            <div className="text-black w-[400px] mx-5 border">
+              <div className="flex flex-col gap-2">
+                <h2 className="text-xl uppercase font-bold text-[#1A7E5B]">
+                  konfirmasi transaksi
+                </h2>
+                {/* Cart list */}
+                {cartsRow?.map((data: any, index: number) => (
+                  <div
+                    className="bg-[#D3EED1] p-3 flex flex-col gap-1 text-sm"
+                    key={`cart${index}`}
+                  >
+                    <h1 className="uppercase text-lg font-bold text-[#1A7E5B]">
+                      {data?.itemName}
+                    </h1>
+                    <div className="flex justify-between">
+                      <p>Qty</p>
+                      <p className="font-bold text-[#1A7E5B]">{data?.qty} item</p>
+                    </div>
+                    <div className="flex justify-between">
+                      <p>Harga</p>
+                      <p className="font-bold text-[#1A7E5B]">
+                        {currencyFormat(data?.totalPrice)}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+
+                {/* Payment section */}
+                <div className="flex flex-col gap-1">
+                  <h1 className="text-[#1A7E5B] font-bold">Metode Pembayaran</h1>
+                  <select
+                    onChange={(e) => setPaymentId(e.target.value)}
+                    className="border border-[#1A7E5B] py-1"
+                    name="payment"
+                    id="payment"
+                  >
+                    <option value="1">Cash</option>
+                    <option value="2">QRIS</option>
+                  </select>
+                </div>
+
+                {/* Total price section */}
+                <div className="flex justify-between mt-5">
+                  <h1 className="uppercase text-[#1A7E5B] font-bold">total harga</h1>
+                  <p className="text-[#1A7E5B] font-bold">
+                    {currencyFormat(
+                      cartsRow?.reduce((acc: any, item: any) => acc + item.totalPrice, 0)
+                    )}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="flex gap-3 justify-center">
+              <button onClick={onCreateTransaction} className="bg-[#1A7E5B] px-5 py-2">
+                Konfirmasi
+              </button>
+              <div className="bg-red-500 flex justify-center items-center">
+                <label
+                  htmlFor="modal-confirm"
+                  className="flex-1 px-5 py-2 cursor-pointer"
+                >
+                  Batal
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
